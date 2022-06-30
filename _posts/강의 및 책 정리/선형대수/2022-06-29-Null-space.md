@@ -16,7 +16,7 @@ $$
 
 ## Null space 구하기
 다음과 같은 형태의 $Ax=b=\textbf{0}$ 가 있다고 하자.
-![Ax=0](images/AX=b.png)
+![Ax=0](images/Ax_b.png)
 이 때, $ number \;of\;equations < number \;of\;unknowns $ 이다. 
 
 ### Row Reduced Echelon form R
