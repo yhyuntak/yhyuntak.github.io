@@ -1,0 +1,6 @@
+<!-- 아직 자세힌 모르겠지만, 뭔가 얘를 어디선가 불러서 표현하게되면 카테고리들을이 모인 곳을 표현해주는 것인듯함.-->
+{%- for post in site.categories[include.taxonomy] -%}
+  {%- unless post.hidden -%}
+    {% include archive-single.html %}
+  {%- endunless -%}
+{%- endfor -%}

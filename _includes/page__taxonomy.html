@@ -1,0 +1,11 @@
+<!-- 포스트에 태그 혹은 카테고리가 front matter에 적혀있다면 그것을 각각의 html로 불러와서 post에서 표현하는 부분임.-->
+
+{% if site.category_archive.type and page.categories[0] %}
+  {% include category-list.html %}
+{% endif %}
+
+<!-- 태그는 쓰지말자
+{% if site.tag_archive.type and page.tags[0] %}
+  {% include tag-list.html %}
+{% endif %} -->
+

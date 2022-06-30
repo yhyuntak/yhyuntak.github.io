@@ -1,0 +1,115 @@
+<!--전체 글 수를 세기 위한 연산. sum 변수에 전체 글 수 저장-->
+
+{% assign sum = site.posts | size %}
+
+<nav class="nav__list">
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">{{ site.data.ui-text[site.locale].menu_label }}</label>
+  <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      <li>
+            📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">{{sum}}</style> <span style="font-family:'Cafe24Oneprettynight';">개</style>
+      </li>
+      <li>
+
+        <!--span 태그로 카테고리들을 크게 분류 ex) EXAMPLE1/EXAMPLE2/EXAMPLE3-->
+
+        <span class="nav__sub-title">강의 및 책 정리</span>
+            <!--ul 태그로 같은 카테고리들 모아둔 페이지들 나열-->
+            <ul>
+
+                <!--Cpp 카테고리 글들을 모아둔 페이지인 /categories/카테고리이름 주소의 글로 링크 연결-->
+                <!--category[1].size 로 해당 카테고리를 가진 글의 개수 표시-->
+
+                {% for category in site.categories %}
+                    {% if category[0] == "이것이 우분투 리눅스다" %}
+                        <li><a href="/categories/this_is_ubuntu" class="">이것이 우분투 리눅스다 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "ubuntu" %}
+                        <li><a href="/categories/this_is_ubuntu_2" class="">이것이 우분투 리눅스다  ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "파이썬 머신러닝 완벽 가이드" %}
+                        <li><a href="/categories/b" class="">파이썬 머신러닝 완벽 가이드({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "패턴 인식과 머신 러닝" %}
+                        <li><a href="/categories/c" class="">패턴 인식과 머신 러닝({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "밑바닥부터 시작하는 딥러닝 2" %}
+                        <li><a href="/categories/d" class="">밑바닥부터 시작하는 딥러닝 2({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "한 권으로 읽는 컴퓨터 구조와 프로그래밍" %}
+                        <li><a href="/categories/the_secret_life_of_programs" class="">한 권으로 읽는 컴퓨터 구조와 프로그래밍 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "선형대수" %}
+                        <li><a href="/categories/선형대수" class="">선형대수 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+<!-- **************************** 큰 타이틀 나눔 줄 **************************** -->
+
+        <span class="nav__sub-title">프로그래밍 언어</span>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "python" %}
+                        <li><a href="/categories/python" class="">python({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+<!-- **************************** 큰 타이틀 나눔 줄 **************************** -->
+
+        <span class="nav__sub-title">다양한 공부</span>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "코딩테스트" %}
+                        <li><a href="/categories/코딩테스트" class="">코딩테스트 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "재밌는 잡지식" %}
+                        <li><a href="/categories/재밌는-잡지식" class="">재밌는 잡지식 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+
+<!-- **************************** 큰 타이틀 나눔 줄 **************************** -->
+
+        <span class="nav__sub-title">Markup</span>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Markup" %}
+                        <li><a href="/categories/Markup_examples" class="">Markup ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+      </li>
+  </ul>
+</nav>

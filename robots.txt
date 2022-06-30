@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yhyuntak.github.io/sitemap.xml
