@@ -65,7 +65,7 @@ This theme comes in nine different skins (in addition to the default one).
 | [Categories Archive][categories-archive] | Posts grouped by category. |
 | [Tags Archive][tags-archive] | Posts grouped by tag. |
 
-Additional sample posts are available under [posts archive][year-archive] on the demo site. Source files for these (and the entire demo site) can be found in [`/docs`](docs).
+Additional sample posts are available under [posts archive][year-archive] on the demo site. Source files for these (and the entire demo site) can be found in [`/docs`](trash/docs).
 
 [header-image-post]: https://mmistakes.github.io/minimal-mistakes/layout-header-image-text-readability/
 [gallery-post]: https://mmistakes.github.io/minimal-mistakes/post%20formats/post-gallery/
@@ -153,7 +153,7 @@ When submitting a pull request:
 2. Create a branch off of `master` and give it a meaningful name (e.g. `my-awesome-new-feature`).
 3. Open a pull request on GitHub and describe the feature or fix.
 
-Theme documentation and demo pages can be found in the [`/docs`](docs) if submitting improvements, typo corrections, etc.
+Theme documentation and demo pages can be found in the [`/docs`](trash/docs) if submitting improvements, typo corrections, etc.
 
 ## Development
 
