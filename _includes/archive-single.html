@@ -27,6 +27,12 @@
       {% else %}
         <a href="{{ post.url | relative_url }}" rel="permalink">{{ title }}</a>
       {% endif %}
+      <small>
+        <i class="fas fa-fw fa-calendar-alt" aria-hidden="true"> </i>{{ post.date | date: " %Y.%m.%d" }}
+        {% if site.category_archive.type and post.categories[0] %} <!-- 태그도 추가하려면  and site.tag_archive.type and post.tags[0] 를 조건문에 넣자. -->
+          {%- include post__taxonomy.html -%}
+        {% endif %}
+      </small>
     </h2>
     {% include page__meta.html type=include.type %}
     {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
