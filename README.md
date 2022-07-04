@@ -1,3 +1,3 @@
 # 공부한 내용들을 기록하기 위한 저의 블로그입니다. 
 
-[제 블로그 주소는 링크를 눌러주세요](yhyuntak.github.io)
+[제 블로그 주소는 링크를 눌러주세요](https://yhyuntak.github.io/)
