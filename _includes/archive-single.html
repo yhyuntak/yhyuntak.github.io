@@ -22,20 +22,31 @@
       </div>
     {% endif %}
     <h2 class="archive__item-title no_toc" itemprop="headline">
+
+      <font size="5em">
       {% if post.link %}
         <a href="{{ post.link }}">{{ title }}</a> <a href="{{ post.url | relative_url }}" rel="permalink"><i class="fas fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
       {% else %}
         <a href="{{ post.url | relative_url }}" rel="permalink">{{ title }}</a>
       {% endif %}
+      </font>
       <small>
+        <font size="4em">
         <i class="fas fa-fw fa-calendar-alt" aria-hidden="true"> </i>{{ post.date | date: " %Y.%m.%d" }}
         {% if site.category_archive.type and post.categories[0] %} <!-- 태그도 추가하려면  and site.tag_archive.type and post.tags[0] 를 조건문에 넣자. -->
           {%- include post__taxonomy.html -%}
         {% endif %}
+        </font>
       </small>
+
+
     </h2>
-    {% include page__meta.html type=include.type %}
-    {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
+
+    {% if post.excerpt %}
+    <p class="archive__item-excerpt" itemprop="description">
+      {{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>
+    {% endif %}
+
   </article>
 
   <script type="text/x-mathjax-config">

@@ -80,6 +80,14 @@
                 {% endfor %}
             </ul>
 
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Mark down" %}
+                        <li><a href="/categories/Mark_down" class="">Mark down({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
 <!-- **************************** 큰 타이틀 나눔 줄 **************************** -->
 
         <span class="nav__sub-title">다양한 공부</span>
@@ -105,7 +113,13 @@
                 {% endfor %}
             </ul>
 
-
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "딥러닝" %}
+                        <li><a href="/categories/deep_learning" class="">딥러닝 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
 <!-- **************************** 큰 타이틀 나눔 줄 **************************** -->
 
         <span class="nav__sub-title">공부 일기</span>
@@ -113,37 +127,6 @@
                 {% for category in site.categories %}
                     {% if category[0] == "영어 공부 일기" %}
                         <li><a href="/categories/english_diary" class="">영어 공부 일기 ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-
-      </li>
-  </ul>
-</nav>
-
-<!-- **************************** 큰 타이틀 나눔 줄 **************************** -->
-
-        <span class="nav__sub-title">공부 일기</span>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "영어 공부 일기" %}
-                        <li><a href="/categories/english_diary" class="">영어 공부 일기 ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-
-      </li>
-  </ul>
-</nav>
-
-
-<!-- **************************** 큰 타이틀 나눔 줄 **************************** -->
-
-        <span class="nav__sub-title">Markup</span>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "Markup" %}
-                        <li><a href="/categories/Markup_examples" class="">Markup ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>

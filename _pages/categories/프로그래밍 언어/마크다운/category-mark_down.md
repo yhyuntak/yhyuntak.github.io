@@ -1,7 +1,7 @@
 ---
-title : "Markup 예제"
+title : "Mark down 문법"
 layout : archive
-permalink : categories/Markup_examples
+permalink : categories/Mark_down
 author_profile : true
 sidebar_main : true
 ---
@@ -10,5 +10,5 @@ sidebar_main : true
 
 ***
 
-{% assign posts = site.categories['Markup'] %} <!-- site.categories.example -->
+{% assign posts = site.categories['Mark down'] %} <!-- site.categories.example -->
 {% for post in posts %} {% include archive-single_main.html type=page.entries_layout %} {% endfor %}
