@@ -5,9 +5,11 @@ categories:
 toc: true
 ---
   
-# Vector space
+# 1. Vector space
 
-## 정의
+<br/>
+
+## 1.1 정의
 
 어떤 집합 $V$이 Vector space를 만족하려면, 다음과 같은 두가지 성질을 만족해야한다.(두 성질에 닫혀 있어야한다.(closed)) 
 
@@ -26,11 +28,13 @@ $$
 
 **Vector space**는 항상 origin을 갖고 있는 것도 잊지 말자.
 
----
+<br/><br/><br/>
 
-# Subspace
+# 2. Subspace
 
-## 정의
+<br/>
+
+## 2.1 정의
 전체 Vector space $V$의 subset $S$가 여전히 Vector space의 조건을 만족한다면, 
 이것을 Subspace라고 부른다. 즉, $s_1,s_2$가 $S$의 원소일 때, $c_1s_1+c_2s_2 \; \in\; S\;\; (\forall s_1,s_2\;\in\;S\subset V,\;\forall c_1,c_2\;\in\;R)$
 를 만족하면 되는 것이다.

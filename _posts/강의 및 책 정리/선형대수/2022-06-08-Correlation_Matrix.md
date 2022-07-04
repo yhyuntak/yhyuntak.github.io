@@ -5,9 +5,11 @@ categories:
 toc: true
 ---
   
-# Correlation Matrix
+# 1. Correlation Matrix
 
-## 정의
+<br/>
+
+## 1.1 정의
 
 다음의 벡터 $A$가 존재한다고 생각하자. 
 

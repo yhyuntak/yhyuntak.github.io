@@ -5,9 +5,11 @@ categories:
 toc: true
 ---
   
-# Linear combination
+# 1. Linear combination
 
-## 정의
+<br/>
+
+## 1.1 정의
 
 다음의 두개의 3차원 column vector $v,w$가 있다고 하자.
 
@@ -26,7 +28,9 @@ $$
 
 두 벡터에 상수 $\alpha,\;\beta$를 곱한 후 더하자. $\alpha,\;\beta$에 contraints가 없다면, 이것을 Linear combination이라고 부른다. 
 
-### 제약이 있으면?
+<br/>
+
+### 1.1.1 제약이 있으면?
 제약에 따라 combination의 이름이 바뀐다.
 1. [Affine combination](https://en.wikipedia.org/wiki/Affine_combination) : $\Sigma a_i = 1$
 2. [Convex combination](https://en.wikipedia.org/wiki/Convex_combination) : $\Sigma a_i = 1\quad and \quad a_i >= 0$ 
@@ -52,7 +56,9 @@ c_2
 \end{aligned}
 $$
 
-## 꼭 알아야 할 것
+<br/>
+
+## 1.2 꼭 알아야 할 것
 
 [위](#정의)의 형태는 아주 간단하게 벡터의 곱 형태로 표현가능하다. 이건 다들 아는 사실이다.
 

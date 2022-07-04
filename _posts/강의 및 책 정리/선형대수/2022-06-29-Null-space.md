@@ -5,21 +5,27 @@ categories:
 toc: true
 ---
   
-# Null space
+# 1. Null space
 
-## 정의
+<br/>
+
+## 1.1 정의
 Null space는 다음의 조건을 만족하는 벡터들의 집합이다.
 
 $$
 N(A) = \{x|Ax=\textbf{0}\}
 $$
 
-## Null space 구하기
+<br/>
+
+## 1.2 Null space 구하기
 다음과 같은 형태의 $Ax=b=\textbf{0}$ 가 있다고 하자.
 ![Ax=0](images/Ax_b.png)
 이 때, $ number \;of\;equations < number \;of\;unknowns $ 이다. 
 
-### Row Reduced Echelon form R
+<br/>
+
+### 1.2.1 Row Reduced Echelon form R
 다음과 같은 예제가 있다고 하자.
 
 $$
@@ -48,7 +54,9 @@ $$
 
 영행렬은 이 과정에서 영행렬이기 때문에 영향을 받지 않는다. 
 
-### Null space 직접 구하기
+<br/>
+
+### 1.2.2 Null space 직접 구하기
 식을 다시 쓰면, 다음과 같다.
 
 $$
@@ -107,7 +115,9 @@ u\\v\\w\\z
 \end{bmatrix}\, ,\;for\;any\;c_1,c_2\}
 $$
 
-## Null space의 dimension
+<br/>
+
+## 1.3 Null space의 dimension
 
 Null space의 dimension은 독립적인 **Special solution**의 수를 뜻한다. (Null space가 Special solution들로 span되는 것이기 때문에 너무나도 당연한 이야기이다.)
 위 예제를 빌려오면, $Dim(N(A))=2$이다. 
