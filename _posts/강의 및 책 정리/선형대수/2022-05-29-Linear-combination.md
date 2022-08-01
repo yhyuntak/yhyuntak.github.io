@@ -5,11 +5,11 @@ categories:
 toc: true
 ---
   
-# 1. Linear combination
+# Linear combination
 
 <br/>
 
-## 1.1 정의
+## 정의
 
 다음의 두개의 3차원 column vector $v,w$가 있다고 하자.
 
@@ -30,7 +30,7 @@ $$
 
 <br/>
 
-### 1.1.1 제약이 있으면?
+### 제약이 있으면?
 제약에 따라 combination의 이름이 바뀐다.
 1. [Affine combination](https://en.wikipedia.org/wiki/Affine_combination) : $\Sigma a_i = 1$
 2. [Convex combination](https://en.wikipedia.org/wiki/Convex_combination) : $\Sigma a_i = 1\quad and \quad a_i >= 0$ 
@@ -58,7 +58,7 @@ $$
 
 <br/>
 
-## 1.2 꼭 알아야 할 것
+## 꼭 알아야 할 것
 
 [위](#정의)의 형태는 아주 간단하게 벡터의 곱 형태로 표현가능하다. 이건 다들 아는 사실이다.
 

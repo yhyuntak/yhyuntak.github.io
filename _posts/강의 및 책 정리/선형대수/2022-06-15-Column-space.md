@@ -5,11 +5,11 @@ categories:
 toc: true
 ---
   
-# 1. Column space
+# Column space
 
 <br/>
 
-## 1.1 정의
+## 정의
 행렬 $A$를 다음과 같이 정의하자.
 
 $$
