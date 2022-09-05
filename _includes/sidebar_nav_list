@@ -120,6 +120,30 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "도커" %}
+                        <li><a href="/categories/deep_learning" class="">도커 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "스파크" %}
+                        <li><a href="/categories/deep_learning" class="">스파크 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "데이터 마이닝" %}
+                        <li><a href="/categories/deep_learning" class="">데이터 마이닝 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
 <!-- **************************** 큰 타이틀 나눔 줄 **************************** -->
 
         <span class="nav__sub-title">공부 일기</span>
