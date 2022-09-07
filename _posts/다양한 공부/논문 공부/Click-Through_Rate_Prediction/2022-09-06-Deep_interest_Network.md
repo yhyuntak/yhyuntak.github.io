@@ -21,8 +21,18 @@ group-wise 방법으로 고정된 길이의 백터들로 변환됩니다. 마지
 이 과정 속에서, 사용자의 특징들은 후보 광고군이 무엇이든 상관없이 고정된 길이의 representation vector로 압축됩니다. 사실 이 부분이 bottleneck이 되어 많은 historical behavior들로부터  
 사용자들의 다양한 어떤 흥미를 효과적으로 팍! 캡쳐하기 위한 Embedding&MLP 방법에 문제를 일으키게 됩니다. 
 
-그래서 저자들은 이 모델 Deep Interest Network(DIN)을 제시해 문제를 타파해보려고 합니다. 이 모델은 특정한 광고에 대해 historical behaviors로 부터 유저 관심도의 표현을 배우기 위해 local activation unit을 
-설계합니다. 
+그래서 저자들은 이 모델 Deep Interest Network(DIN)을 제시해 문제를 타파해보려고 합니다. 이 모델은 특정한 광고에 대해 historical behaviors로 부터 유저 관심도의 representation vector를 배우기 위해 local activation unit을 
+설계합니다. 이 vector는 다른 광고들에 따라 변화하고, 모델의 표현 능력을 엄청나게 향상시킵니다. 
+
+게다가 저자들은 2개의 기술을 개발합니다.
+
+* mini-batch aware regularization
+* data adaptive activation function
+
+  이것들은 아직은 잘 모르겠지만, 학습할 때 파라미터의 개수에 관련해 영향을 주는 것 같습니다.
+
+데이터 셋으로는 2개의 공공 데이터와 Alibaba real production dataset들을 사용해 저자들의 모델의 효과를 입증하고자 합니다.
+실제로 논문이 쓰여질 시점엔 DIN은 이미 알리바바의 online display advertising system에 성공적으로 사용했다고 합니다.
 
 <br/>
 
@@ -30,12 +40,8 @@ group-wise 방법으로 고정된 길이의 백터들로 변환됩니다. 마지
 
 # 1. _Introduction_
 
-* FCN은 end-to-end 학습을 진행하고, pixels-to-pixels 학습을 진행함
-* 저자들의 방법은 전,후처리 따위 없이 진행될 것이고 fully convolutional and fine-tuning 을 통해 
-좋은 분류기로써의 성능을 보여줌
-* Semantic segmentation에서, global information은 이 물체가 **무엇**인지 판단하는데 도움을 주고, local information은 이 물체가 **어디**에 있는지 판단하는데 도움을 줌
-* Deep feature hierachies는 location과 semantic을 local-to-global pyramid구조에서 같이 해석하는데, 저자들은 이런 정보들을 합치고 싶어함.
-* 그래서 일명 **skip** 구조를 정의해서 deep,coarse,semantic 정보들과 shallow,fine,appearance 정보들을 합치고자 한다.
+
+
 
 <br/>
 
