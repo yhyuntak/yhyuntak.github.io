@@ -125,7 +125,7 @@
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "스파크" %}
-                        <li><a href="/categories/deep_learning" class="">스파크 ({{category[1].size}})</a></li>
+                        <li><a href="/categories/spark" class="">스파크 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
