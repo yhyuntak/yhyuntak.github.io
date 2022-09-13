@@ -148,7 +148,13 @@
                     {% endif %}
                 {% endfor %}
             </ul>
-
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "컴퓨터 비전" %}
+                        <li><a href="/categories/computer_vision" class="">컴퓨터 비전 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
       </li>
   </ul>
 </nav>
