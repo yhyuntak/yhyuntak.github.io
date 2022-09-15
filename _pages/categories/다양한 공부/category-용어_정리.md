@@ -1,7 +1,7 @@
 ---
-title : "용어 정리"
+title : "딥러닝"
 layout : archive
-permalink : categories/용어-정리
+permalink : categories/deep_learning
 author_profile : true
 sidebar_main : true
 ---
@@ -9,5 +9,5 @@ sidebar_main : true
 
 ***
 
-{% assign posts = site.categories['용어 정리'] %} <!-- site.categories.example -->
+{% assign posts = site.categories['딥러닝'] %} <!-- site.categories.example -->
 {% for post in posts %} {% include archive-single_main.html type=page.entries_layout %} {% endfor %}

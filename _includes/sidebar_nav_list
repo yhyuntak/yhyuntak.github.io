@@ -93,6 +93,15 @@
         <span class="nav__sub-title">다양한 공부</span>
             <ul>
                 {% for category in site.categories %}
+                    {% if category[0] == "용어 정리" %}
+                        <li><a href="/categories/용어-정리" class="">용어 정리({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+
+            <ul>
+                {% for category in site.categories %}
                     {% if category[0] == "코딩테스트" %}
                         <li><a href="/categories/코딩테스트" class="">코딩테스트 ({{category[1].size}})</a></li>
                     {% endif %}
@@ -117,7 +126,7 @@
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "도커" %}
-                        <li><a href="/categories/deep_learning" class="">도커 ({{category[1].size}})</a></li>
+                        <li><a href="/categories/docker" class="">도커 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -133,7 +142,7 @@
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "데이터 마이닝" %}
-                        <li><a href="/categories/deep_learning" class="">데이터 마이닝 ({{category[1].size}})</a></li>
+                        <li><a href="/categories/data_mining" class="">데이터 마이닝 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
