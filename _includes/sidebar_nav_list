@@ -69,6 +69,13 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "파이썬 머신러닝 완벽 가이드" %}
+                        <li><a href="/categories/파이썬-머신러닝-완벽-가이드" class="">파이썬 머신러닝 완벽 가이드 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
 <!-- **************************** 큰 타이틀 나눔 줄 **************************** -->
 
         <span class="nav__sub-title">프로그래밍 언어</span>
@@ -164,21 +171,6 @@
                     {% endif %}
                 {% endfor %}
             </ul>
-      </li>
-  </ul>
-</nav>
-
-<!-- **************************** 큰 타이틀 나눔 줄 **************************** -->
-
-        <span class="nav__sub-title">공부 일기</span>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "영어 공부 일기" %}
-                        <li><a href="/categories/english_diary" class="">영어 공부 일기 ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-
       </li>
   </ul>
 </nav>
