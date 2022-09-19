@@ -76,6 +76,14 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "패턴 인식과 머신 러닝" %}
+                        <li><a href="/categories/패턴-인식과-머신-러닝" class="">패턴 인식과 머신 러닝 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
 <!-- **************************** 큰 타이틀 나눔 줄 **************************** -->
 
         <span class="nav__sub-title">프로그래밍 언어</span>
