@@ -1,14 +1,16 @@
 ---
-title: "object segmentation에 대해서 알아보자 - STEP 2"
+title: "object detection에 대해서 알아보자 - STEP 2"
 categories:
   - 딥러닝
-  - object segmentation
+  - object detection
 toc: True
 
 ---
 
 [이전 글](https://yhyuntak.github.io/%EB%94%A5%EB%9F%AC%EB%8B%9D/object%20segmentation/object-segmentation%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90-STEP-1/)에 이어서 계속해서 리뷰를 하겠습니다.
-STEP 1에서는 HLS를 이용하여 object segmentation..? 이라기보단 bbox를 만들고 labeling 및 score를 따지는 방법을 알아봤습니다.
+
+
+STEP 1에서는 HLS를 이용하여 object detection..? 이라기보단 bbox를 만들고 labeling 및 score를 따지는 방법을 알아봤습니다.
 하지만 이것은 traditional computer vision이고, 여러 이미지를 스케일링해서 sliding window를 하고, 각각을 분류기에 넣어서 확인하고.. 하는 작업을 매번 한다는 것은 너무나 비효율적입니다.
 따라서 우리는 조금 더 발전된 기술에 대해 알아보려고 합니다.
 
@@ -47,7 +49,7 @@ SS는 superpixel algorithm을 사용한 이미지를 over segmenting 함으로�
 
 superpixel algorithm을 사용하면, 그림 1과 같은 결과를 얻게 된다고 생각하고 넘어갑시다. 
 
-|![그림 1](/assets/images/다양한 공부/딥러닝/object segmentation/step2/그림 1.png)|
+|![그림 1](/assets/images/다양한 공부/딥러닝/object detection/step2/그림 1.png)|
 |:--:|
 |_그림 1_|
 
@@ -83,7 +85,7 @@ SS의 중요한 5가지의 특성들은 다음과 같습니다.
 
 그림 2를 보면 이해가 될 것입니다.
 
-|![그림 2](/assets/images/다양한 공부/딥러닝/object segmentation/step2/그림 2.png)|
+|![그림 2](/assets/images/다양한 공부/딥러닝/object detection/step2/그림 2.png)|
 |:--:|
 |_그림 2_|
 
