@@ -176,11 +176,103 @@ CTR 예측 모델을 만들 때, 많은 Historical behavior들로부터 사용�
 
 ## 4.2. Base Model(Embedding&MLP)
 
+|![basemodel](/assets/images/다양한 공부/논문/CTR/Deep_Interest_Network/basemodel.png)|
+|:--:|
+|_그림 2. Base model_|
+
+가장 인기있는 모델 구조[3,4,21]는 그림 2처럼 유사한 Embedding&MLP paradigm을 가집니다. 저자들은 이 모델을 DIN의 base model로 사용한다고 하네요. 
+저자들의 DIN의 구조는 그림 3과 같습니다.
+
+|![DINmodel](/assets/images/다양한 공부/논문/CTR/Deep_Interest_Network/DIN.png)|
+|:--:|
+|_그림 3. Deep Interest Network_|
+
+### Embedding layer
+
+입력 데이터들이 고차원의 binary 벡터들이라서 이것을 저차원의 dense representation으로 변환하기 위해서 embedding layer를 사용한다고 합니다.
+i번째 feature 그룹 $t_i$에 대해, i번째 embedding dictionary를 $W^i=[w_1^i,...,w_j^i,...,w_{K_i}^i]\;\in\;R^{D\times K_i}$라고 표현합니다.
+$w_j^i\in R^D$는 D차원의 embedding vector라고 합니다. Embedding operation은 table lookup 메커니즘을 따른다는데.. 이게 뭔진 잘 모르겠네요.
+
+* 만약 원-핫 벡터 $t_i$라면 j번째 요소가 $t_i[j]=1$가 됩니다. 그럼 $W^i$와 $t_i$가 곱해지면 $w_j^i$만 남습니다. 이걸 single embedding vector $e_i$라고 합니다
+* 만약 멀티-핫 벡터 $t_i$라면 j번째 요소는 여전히 $t_i[j]=1$이지만, $j\in \{i_1,i_2,...,i_k\}$ k개의 1이 있을 겁니다. 그럼 $t_i$의 embedded representation은 
+리스트처럼 뽑혀서 single embedding vector $e_{i_k}$들이 묶인 $\{ e_{i_1},e_{i_2},...,e_{i_k} \}=\{ w^i_{i_1},w^i_{i_2},...,w^i_{i_k}\}$가 됩니다.
+
+### Pooling layer and Concat layer
+
+사용자마다 행동의 수가 다릅니다. 그래서 멀티-핫 behavioral feature vector $t_i$의 0이 아닌 값의 수는 데이터마다 다르죠. 이것은 embedding 벡터들의 리스트의 길이를 다양하게 만듭니다.
+fully connected network은 오직 고정된 길이의 입력들만 다룰 수 있기에, embedding 벡터들의 리스트를 pooling layer를 통해 고정된 길이의 벡터로 바꿔야합니다. 
+
+$$
+e_i=pooling(e_{i_1},e_{i_2},...,e_{i_k})
+$$
+
+가장 많이 사용되는 pooling layer들은 **sum pooling**과 average pooling입니다. 전자는 embedding vector들의 리스트를 element-wise sum을 하고, 후자는 평균을 계산하죠.
+
+embedding과 pooling layer들은 원래의 sparse한 feature들을 여러개의 고정된 길이의 representation vector들로 매핑하는 group-wise 방식으로 작동합니다. {아마 함께 작동한다는 느낌인 것 같습니다.}
+그러면 모든 벡터들은 전체적인 representation 벡터를 얻기위해 함께 concatenate됩니다. 
+
+### MLP
+앞서 concatanated된 dense representation 벡터가 주어지면, fully connected layer들은 feature들의 조합을 자동으로 학습하곤 합니다. 
+최근에 발전된 방법[4,5,10]은 더 나은 정보 추출을 위해서 MLP의 구조를 설계했죠.
+
+### Loss
+base모델에 사용된 목적함수는 다음과 같은 negative log-likelihood 함수입니다.
+
+$$
+L=-\frac{1}{N}\sum_{(x,y)\in S} (y\log p(x) + (1-y)\log (1-p(x)))
+$$
+
+※ $S$는 N개의 학습 셋을 얘기하고, $x$는 입력 데이터, $y$는 0 또는 1을 갖는 이진 label입니다. 그리고 $p(x)$는 softmax layer를 통해 얻는 sample $x$가 클릭 될 것으로 예측되는 확률입니다.
+
+
+<br/>
+
+## 4.2. The structure of Deep Interest Network
+
+테이블 1의 feature들에서, 사용자 행동 feature들은 중요하고 사용자 관심도를 모델링하는데 핵심 역할을 합니다.
+
+Base model는 앞선 방법으로 사용자 관심도에 대한 고정된 길이의 representation vector를 얻습니다. 이 representation vector는 
+어떤 후보 광고든 상관 없이 주어진 사용자에 대해 같음을 유지합니다. 
+그래서 **제한된 dimension을 갖는 사용자 representation vector는 사용자의 다양한 관심사들을 표현하기 하는데에 bottleneck이 됩니다.**
+이걸 해결하기 위한 간단한 방법은 embedding vector의 차원을 확장하는거지만.. 이렇게하면 learning parmameter의 크기가 매우 커질 것입니다.
+그렇게 되면 제한된 학습 데이터에서 overfitting이 일어날 것이고, 용량과 계산량에 부담을 줘서 산업의 online system에선 쓸 수 없게되죠.
+
+그럼 어떻게 이 문제를 해결해야할까요!? **사용자 관심사들의 local activation 특성**은 우리에게 Deep Interset Network를 만들 수 있게 영감을 줍니다!
+챕터3에서 젊은 엄마의 예시를 들었는데, 기억하시나요? 그녀는 보여지는 새로운 핸드백을 찾고 클릭합니다. click action의 추진력을 해부해 봅시다! 
+전시된 광고는 그녀의 과거의 행동들을 soft-searching하고 최근에 토트백과 가죽 핸드백과 비슷한 물건을 검색했던 것을 찾아서 젊은 엄마의 관련된 관심사들을 
+hit! 합니다. **즉, 전시된 광고와 관련된 행동들은 click action에 매우 영향을 주죠.** 그래서 DIN은 주어진 광고에 관한 locally activated interest의 representation에 
+주목하면서 이 과정을 시뮬레이션합니다. 모든 유저들의 다양한 관심도들을 같은 벡터로 표현하는 것 대신에, 
+DIN은 후보 광고에 대한 과거 행동의 관련성을 고려하여 사용자 관심도의 representation 벡터를 적응적으로 계산합니다.
+
+그림 3은 DIN의 구조를 나타냅니다. Base model과 비교하면 DIN은 local activation unit을 소개하고 다른 틀은 같습니다. 특히, activation unit들은 사용자 behavior feature들에 적용됩니다.
+이것은 주어진 후보 광고 A에 대한 사용자 representation $\nu_U$을 적응적으로 계산하기 위해 weighted sum pooling을 수행합니다.
+
+$$
+\nu_U(A) = f(\nu_A,e_1,e_2,...,e_H) = \sum^H_{j=1}a(e_j,\nu_A)e_j =\sum^H_{j=1}w_je_j
+$$
+
+※ $\{e_1,e_2,...,e_H\}$는 사용자 U의 길이가 H인 embedding vector list를 의미하고, $\nu_A$는 광고 A의 embedding vector입니다.
+이 방법으로 $\nu_U(A)$는 다른 광고들마다 바뀝니다. $a(\ast)$는 그림 3에서 Goods N Weight라고 써있는 activation weight를 출력하는 feed-forward 네트워크입니다.
+**_그리고 $a(\ast)$는 이들의 out product를 더한다는데.. 이게 그림이랑 엮어서 봐도 무슨 소린지 아직 모르겠습니다._**
+
+local activation unit은 NMT에서 개발된 attention method와 비슷한 아이디어입니다. 그러나 다른 점은 constraint $\sum_i w_i=1$이 
+사용자 관심도의 intensity를 보존하는 것을 목표로 하면서 $\nu_U(A)$ 계산을 느슨하게 해준다는 겁니다. 이전의 방법에선 $a(\ast)$의 출력에 softmax로 normalization을 하는데,
+이걸 대신해서 contraint를 거는 것 같네요. 
+
+예를 들어봅시다. 한 사용자의 과거 행동들이 90%는 옷, 10%는 전자기기를 포함하면, 티셔츠와 핸드폰의 두 광고가 주어졌을 때, 티셔츠 광고는 clothes에 속한 과거 행동의 대부분에 작용해서
+아마 $\nu_U$가 핸드폰보다 가장 큰 값을 가질 겁니다. 기존의 방법은 이런 resolution을 잃는다고 하네요. 
+
+저자들은 LSTM도 써보려했지만, 그리 좋은 결과를 얻진 못했나봅니다.
 
 <br/><br/><br/>
 
 # 5. _Training Techniques_
 ---
+
+이번엔 알리바바에서 대용량의 데이터들을 가지고 학습할 때 도움이 되는 2개의 기술들에 대해 소개하네요.
+
+## 5.1. Mini-batch Aware Regularization
+
 
 
 
