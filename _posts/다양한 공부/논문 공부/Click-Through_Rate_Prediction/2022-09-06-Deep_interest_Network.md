@@ -274,6 +274,45 @@ local activation unit은 NMT에서 개발된 attention method와 비슷한 아�
 ## 5.1. Mini-batch Aware Regularization
 
 
+|![그림 4](/assets/images/다양한 공부/논문/CTR/Deep_Interest_Network/그림 4.png)|
+|:--:|
+|_그림 4_|
+
+Overfitting은 큰 문제죠. 예를 들어, 테이블 1에서 사용자의 visited_goods_ids와 광고의 goods_id를 포함한 0.6 billion의 차원을 갖는 goods_ids의 feature같은 경우, 
+모델의 성능을 regularization없이 첫 epoch만에 급격히 떨어뜨립니다. 그림 4에서 어두운 초록색 라인처럼 말이죠. 그렇다고 직접 전통적인 regularization을 적용해 버리는 것도 
+실용적인 방법은 아닙니다(릿지,라쏘 같은 규제말이죠). 정말일까요?
+
+한번 릿지 규제 $l_2 regularization$을 예로 들어봅시다. 규제 없이 SGD를 베이스로 하는 최적화 방법에서는 오직 각각의 mini-batch에서 나타나는 0이 아닌 sparse feature들만 필요합니다.
+그러나 릿지 규제를 추가하면, 각각의 mini-batch마다 모든 파라미터들(가중치 같은)에 대해 L2 norm을 계산해야합니다. 왜냐하면, 릿지 규제는 파라미터(가중치)의 절대값을 최대한 작게 만드는게 목표이기 때문이죠.
+그래서 너무 많은 계산이 필요하게 되니까.. 문제가 발생합니다.  
+
+이 논문에서 효과적인 mini-batch aware regularizer를 소개합니다. 이건 각각의 미니 배치에서 나타나는 sparse feature들의 파라미터들에 대해 L2 norm을 계산합니다. 
+사실, embedding dictionary가 CTR 네트워크의 대부분의 파라미터들에 기여하고 많은 계산량의 어려움을 유발합니다. $W \in R^{D\times K}$는 전체 embedding dictionary의 파라미터들을 얘기합니다.
+D는 임베딩 벡터의 차원이고, K는 feature space의 차원입니다. $W$에 대한 릿지 규제를 확장해봅시다.
+
+$$
+L_2(W) = || W ||_2^2 = \sum_{j=1}^K || w_j ||^2_2 = \sum_{(x,y)\in S} \sum_{j=1}^K \frac{I(x_j \neq 0)}{n_j} || w_j ||^2_2
+$$
+
+* $w_j \in R^D$ : j번째 임베딩 벡터
+* $I(x_j \neq 0)$ : 데이터 객체 x가 feature id $j$를 갖는지 여부
+* $n_j$ : 모든 샘플들에서 feature id $j$가 발생하는 횟수
+
+위 식은 mini-batch aware manner로 다음과 같이 바꿀 수 있습니다.
+
+$$
+L_2(W) = \sum_{j=1}^K \sum_{m=1}^B \sum_{(x,y)\in B_m} \frac{I(x_j \neq 0)}{n_j} || w_j ||^2_2
+$$
+
+* $B$ : 미니 배치의 수
+* $B_m$ : m번째 미니 배치
+
+미니 배치 B_m에서 feature id j를 갖는 데이터가 하나라도 있는지 묻는 $\alpha_{mj}=\max_{(x,y)\in B_m} I(x_j \neq 0)$을 설정하자.
+그러면 위 식은 다음과 **근사화**할 수 있다.
+
+$$
+L_2(W) \approx \sum_{j=1}^K \sum_{m=1}^B  \frac{\alpha_{mj}}{n_j} || w_j ||^2_2
+$$
 
 
 <br/><br/><br/>
