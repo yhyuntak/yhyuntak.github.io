@@ -35,8 +35,7 @@ group단위로 고정된 길이의 백터들로 변환됩니다. 마지막으로
 데이터 셋으로는 2개의 공공 데이터와 Alibaba real production dataset들을 사용해 저자들의 모델의 효과를 입증하고자 합니다.
 실제로 논문이 쓰여질 시점엔 DIN은 이미 알리바바의 online display advertising system에 성공적으로 사용했다고 합니다.
 
-<br/><br/><br/>
-
+<br/><br/>
 
 # 1. _Introduction_
 
@@ -70,7 +69,7 @@ large scale sparse feature들을 가진 산업의 deep network를 학습하는 �
 본 논문에선, 미니 배치에 나타나는 0이 아닌 feature들에 대해 $L_2\;norm$을 계산해 계산이 되게끔 하는! 새로운 mini-batch aware regularization을 개발합니다.
 그리고 입력들의 분포와 관련된 recitified point들을 적응적으로 조정하여 흔히 사용되는 PReLU를 일반화하는 data adaptive activation function를 설계합니다! 이것은 sparse feature들을 갖는 산업 네트워크를 훈련하는데 도움이 될 것입니다.
 
-<br/><br/><br/>
+<br/><br/>
 
 # 2. _Related work_
 ---
@@ -106,7 +105,7 @@ NMT와 유사하게 이것은 [RNN](https://ieeexplore.ieee.org/document/6795228
 user representation vector는 광고와 사용자간에 상호작용이 없는 DeepIntent와는 다르게, 다른 광고들에 따라 다릅니다. 
 
 
-<br/><br/><br/>
+<br/><br/>
 
 # 3. _Background_
 ---
@@ -129,7 +128,7 @@ user representation vector는 광고와 사용자간에 상호작용이 없는 D
 명백하게 보여진 광고는 이 엄마들의 관심사들과 일치하거나 일부만 활성화(activate)됩니다. 요약하자면, 많은 행동 데이터를 가진 사용자들의 관심사들은 **다양하고**, 특정 광고가 주어지면 **부분적으로 활성화**될 수 있습니다. 
 저자들은 CTR 예측 모델을 짓는데 이런 특성들을 사용하는게 중요하다는 것을 나중에 보여준다고 합니다!
 
-<br/><br/><br/>
+<br/><br/>
 
 # 4. _Deep Interest Network_
 ---
@@ -138,6 +137,8 @@ Sponsored search와 다르게, 사용자들은 명시적으로 의사를 표현�
 CTR 예측 모델을 만들 때, 많은 Historical behavior들로부터 사용자 관심사들을 추출하기 위한 효과적인 접근법이 필요합니다.
 사용자들을 묘사하는 특징들과 광고들은 광고 시스템의 CTR 모델링에 있어 기본적인 요소들입니다.
 **이런 특징들을 합리적으로 사용하고 정보를 추출하는 것은 중요합니다!**
+
+<br/>
 
 ## 4.1. Feature Representation
 
@@ -264,12 +265,14 @@ local activation unit은 NMT에서 개발된 attention method와 비슷한 아�
 
 저자들은 LSTM도 써보려했지만, 그리 좋은 결과를 얻진 못했나봅니다.
 
-<br/><br/><br/>
+<br/><br/>
 
 # 5. _Training Techniques_
 ---
 
 이번엔 알리바바에서 대용량의 데이터들을 가지고 학습할 때 도움이 되는 2개의 기술들에 대해 소개하네요.
+
+<br/>
 
 ## 5.1. Mini-batch Aware Regularization
 
@@ -282,7 +285,7 @@ Overfitting은 큰 문제죠. 예를 들어, 테이블 1에서 사용자의 visi
 모델의 성능을 regularization없이 첫 epoch만에 급격히 떨어뜨립니다. 그림 4에서 어두운 초록색 라인처럼 말이죠. 그렇다고 직접 전통적인 regularization을 적용해 버리는 것도 
 실용적인 방법은 아닙니다(릿지,라쏘 같은 규제말이죠). 정말일까요?
 
-한번 릿지 규제 $l_2 regularization$을 예로 들어봅시다. 규제 없이 SGD를 베이스로 하는 최적화 방법에서는 오직 각각의 mini-batch에서 나타나는 0이 아닌 sparse feature들만 필요합니다.
+한번 릿지 규제 $l_2\;regularization$을 예로 들어봅시다. 규제 없이 SGD를 베이스로 하는 최적화 방법에서는 오직 각각의 mini-batch에서 나타나는 0이 아닌 sparse feature들만 필요합니다.
 그러나 릿지 규제를 추가하면, 각각의 mini-batch마다 모든 파라미터들(가중치 같은)에 대해 L2 norm을 계산해야합니다. 왜냐하면, 릿지 규제는 파라미터(가중치)의 절대값을 최대한 작게 만드는게 목표이기 때문이죠.
 그래서 너무 많은 계산이 필요하게 되니까.. 문제가 발생합니다.  
 
@@ -298,7 +301,12 @@ $$
 * $I(x_j \neq 0)$ : 데이터 객체 x가 feature id $j$를 갖는지 여부
 * $n_j$ : 모든 샘플들에서 feature id $j$가 발생하는 횟수
 
-위 식은 mini-batch aware manner로 다음과 같이 바꿀 수 있습니다.
+{위 식처럼 되는 이유를 제 생각대로 설명해보겠습니다. K차원을 갖는 데이터 객체 $x$가 N개 있다고 한다면, $X\in R^{N\times K}$가 됩니다. 
+데이터 객체 벡터 $x$는 원-핫/멀티-핫 인코딩으로 이루어져있기 때문에, j번째 요소에는 0또는 1이 있겠죠. 그럼 j번째 column에는 N개의 요소들이 있는데, 
+그 중 1인 것들의 수를 세어 $n_j$를 만드는 겁니다. 그렇게 되면 위 식의 제일 마지막 항의 첫 summation과 I()와 $n_j$가 이해가 될겁니다. $x$의 j번째 요소가 0이 아닌 것은 
+$n_j$만큼 있으니 상수항으로 곱해져도 결국 같은 식이 되는겁니다. }
+
+위 식은 mini-batch를 이용한 식으로 다음과 같이 바꿀 수 있습니다.
 
 $$
 L_2(W) = \sum_{j=1}^K \sum_{m=1}^B \sum_{(x,y)\in B_m} \frac{I(x_j \neq 0)}{n_j} || w_j ||^2_2
@@ -307,15 +315,148 @@ $$
 * $B$ : 미니 배치의 수
 * $B_m$ : m번째 미니 배치
 
-미니 배치 B_m에서 feature id j를 갖는 데이터가 하나라도 있는지 묻는 $\alpha_{mj}=\max_{(x,y)\in B_m} I(x_j \neq 0)$을 설정하자.
-그러면 위 식은 다음과 **근사화**할 수 있다.
+미니 배치 $B_m$에서 feature id j를 갖는 데이터가 하나라도 있는지 묻는 $\alpha_{mj}=\max_{(x,y)\in B_m} I(x_j \neq 0)$을 설정합시다. 아마 미니배치 $B_m$에서 
+j번째 요소에 1인 값의 수를 표현하는 것 같네요?
+
+그러면 위 식은 다음과 **근사화**할 수 있습니다. 
 
 $$
 L_2(W) \approx \sum_{j=1}^K \sum_{m=1}^B  \frac{\alpha_{mj}}{n_j} || w_j ||^2_2
 $$
 
+m번째 미니베치에서, feature j의 embedding weights에 대한 gradient는 다음과 같습니다.
 
-<br/><br/><br/>
+$$
+
+w_j \leftarrow w_j-\eta [\frac{1}{ | B_m | } \sum_{(x,y)\in B_m} \frac{\partial L(p(x),y)}{\partial w_j}+\lambda \frac{\alpha_{mj}}{n_j}w_j] 
+
+$$
+
+<br/>
+
+## 5.2. Data Adaptive Activation Function
+
+|![그림 3](\assets\images\다양한 공부\논문\CTR\Deep_Interest_Network\그림 3.png)|
+|:--:|
+|_그림 3_|
+
+PReLU는 다음과 같습니다. 
+
+$$
+f(s) = \begin{cases} 
+ s,\;\text{if}\;s>0 & \\
+ \alpha s ,\; \text{if}\;s <= 0
+\end{cases} = p(s) \cdot s + (1-p(s)) \cdot \alpha s 
+$$
+
+$s$는 활성화함수 $f(\cdot)$의 1차원 입력이고, $p(s)=I(s>0)$은 $f(s)$를 $s와 \alpha s$로 스위칭 해주는 indicator 함수입니다.
+$\alpha$는 학습파라미터이구요. 그림 3의 왼쪽은 제어함수로써의 PReLU를 보여줍니다. PReLU는 0에서 급격한 변화를 보입니다. 이것은 
+각각의 레이어의 입력들이 다른 분포를 따를 때, 적절하지 않을 것입니다. 이것을 고려해서, 저자들은 새로운 data adaptive activation function을 그림 3의 오른쪽처럼 설계하고
+_**Dice**_라고 이름 짓습니다. 식은 다음과 같습니다.
+
+$$
+f(s) = p(s) \cdot s + (1-p(s)) \cdot \alpha s, \; p(s) = \frac{1}{1+e^{-\frac{s-E[s]}{\sqrt{\text{Var}[s]+\epsilon}}}}
+$$
+
+학습 페이즈에서, $E[s]$와 $\text{Var}[s]$ 는 각각의 미니 배치에서 입력의 평균과 분산입니다. 
+테스트 페이즈에서,  $E[s]$와 $\text{Var}[s]$ 는 데이터에 대한 평균  $E[s]$와 $\text{Var}[s]$ 를 움직이면서..? 계산됩니다. { 이게 무슨소린진 아직 모르겠네요 }
+$\epsilon$은 작은 상수로 $10^{-8}$로 잡았다고 합니다.
+
+Dice는 PReLU의 일반화로 보여질 수 있습니다. 핵심은 입력 데이터의 분포에 따라 recitified point를 adaptively하게 조정한다는 것입니다. 게다가, Dice는 스위칭하는데 스무스하게 사용하구요.
+$E[s]$와 $\text{Var}[s]$ 가 0일땐, Dice는 PReLu에서 degenerate하다고 합니다..?
+
+<br/><br/>
 
 # 6. _Experiments_
 ---
+
+{이제 실험파트입니다! 결과가 궁금하네요!}
+
+<br/>
+
+## 6.1. Datasets and Experimental Setup
+
+데이터 셋은 다음의 3가지를 사용합니다.
+
+* Amazon dataset
+* MovieLens dataset
+* Alibaba dataset
+
+데이터 셋의 통계는 테이블 2와 같습니다. 자세한 설명은 논문을 참고해주세요.
+
+|![테이블 2](\assets\images\다양한 공부\논문\CTR\Deep_Interest_Network\테이블 2.png)|
+|:--:|
+|_테이블 2_|
+
+<br/>
+
+
+## 6.2. Competitors
+
+비교에 사용되는 모델들은 다음의 5가지 입니다.
+
+*[LR](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://static.googleusercontent.com/media/research.google.com/ko//pubs/archive/41159.pdf) : CTR 예측 태스크를 위한 딥 네트워크들이 있기 전에 널리 사용되던 얕은 모델
+* BaseModel : 4.2에서 소개했던 Embedding&MLP 구조를 갖는 모델입니다. 
+* [Wide&Deep](https://arxiv.org/abs/1606.07792) : 실제 산업 현장에서 사용되는 모델입니다. 자세한 내용은 논문을 참고합시다.
+* [PNN](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/1611.00144.pdf) : BaseModel에서 조금 향상된 모델입니다.
+* [DeepFM](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/1703.04247.pdf) : Wide&Deep에 "wide" 모듈로써 feature engineering job을 저장하는 factorization machine을 넣은 모델입니다.
+
+<br/>
+
+
+## 6.3. Metrics
+
+평가 지표로 user weighted AUC를 사용합니다.
+
+$$
+AUC = \frac{\sum_{i=1}^n #\text{impression}_i \times AUC_i}{\sum_{i=1}^n #\text{impression}_i}
+$$
+
+그리고 모델들에 대한 상대적인 향상치를 측정하기 위해 RelaImpr 평가 지표를 도입합니다. 
+
+$$
+\text{RelaImpr} = (\frac{AUC(measured model)-0.5}{AUC(BaseModel)-0.5}-1)\times 100%
+$$
+
+여기서 BaseModel의 정확도를 기준으로 삼는걸 볼 수 있네요!
+
+<br/>
+
+## 6.4. Result from model comparison on Amazon dataset dan MovieLens dataset
+
+|![테이블 3](\assets\images\다양한 공부\논문\CTR\Deep_Interest_Network\테이블 3.png)|
+|:--:|
+|_테이블 3_|
+
+테이블 3은 각 데이터 셋들에 대한 결과를 보여줍니다. 각 실험들은 5번 반복해서 평균낸 것입니다. 
+DIN이 가장 성능이 좋지만, 특히 사용자 행동 데이터가 굉장히 많은 아마존데이터셋에서 엄청난 성능을 보여줍니다!
+저자들은 이 결과의 공을 local activation unit structure로 돌리네요. 
+
+<br/>
+
+## 6.5. Performance of reqularization
+
+|![그림 4](\assets\images\다양한 공부\논문\CTR\Deep_Interest_Network\그림 4.png)|
+|:--:|
+|_그림 4_|
+
+|![테이블 4](\assets\images\다양한 공부\논문\CTR\Deep_Interest_Network\테이블 4.png)|
+|:--:|
+|_테이블 4_|
+
+사실, MovieLens와 아마존 데이터셋의 feature의 차원이 그리 크지 않아서 저자들이 생각하던 overfitting 문제를 제대로 만나지 못했다고 합니다.
+알리바바의 데이터셋은 엄청 차원이 커서, overfitting문제를 만났다고 하네요. 어떤 규제도 걸지 않고 overfitting문제를 만나게 되면, 그림 4의 어두운 초록색 선처럼
+epoch 1부터 모델의 성능이 급격히 떨어집니다. 그래서 저자들은 다음의 4가지의 규제 방식으로 각각 실험해서 차이를 확인해보려고합니다.
+
+* [Dropout](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf) 
+* Filter
+* Regularization in [DiFacto](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.cs.cmu.edu/~muli/file/difacto.pdf) : feature들과 자주 관련되는 파라미터들의 지나친 규제를 줄입니다.?
+* MBA : 저자들이 제안하는 방법입니다.
+
+그림 4와 테이블 4는 결과를 보여줍니다. 
+
+* Dropout : overfitting을 꽤 막아주지만, 수렴이 느리군요.
+* Filter : Dropout과 비슷해 보입니다.
+* DiFacto : 이것은 goods_id가 높은 빈도 수를 보이기에, 패널티를 주었습니다. 그래서 filter보다 더 안좋은 것 같네요? 
+
+저자들의 방법은 다른 방법들에 비해 상당히 overfitting 문제를 막아줍니다. 
