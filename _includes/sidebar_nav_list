@@ -121,6 +121,14 @@
 
             <ul>
                 {% for category in site.categories %}
+                    {% if category[0] == "머신러닝" %}
+                        <li><a href="/categories/machine_learning" class="">머신러닝 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+            <ul>
+                {% for category in site.categories %}
                     {% if category[0] == "도커" %}
                         <li><a href="/categories/docker" class="">도커 ({{category[1].size}})</a></li>
                     {% endif %}

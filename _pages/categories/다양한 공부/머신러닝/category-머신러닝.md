@@ -1,7 +1,7 @@
 ---
-title : "딥러닝"
+title : "머신러닝"
 layout : archive
-permalink : categories/deep_learning
+permalink : categories/machine_learning
 author_profile : true
 sidebar_main : true
 ---
@@ -9,5 +9,5 @@ sidebar_main : true
 
 ***
 
-{% assign posts = site.categories['딥러닝'] %} <!-- site.categories.example -->
+{% assign posts = site.categories['머신러닝'] %} <!-- site.categories.example -->
 {% for post in posts %} {% include archive-single_main.html type=page.entries_layout %} {% endfor %}
