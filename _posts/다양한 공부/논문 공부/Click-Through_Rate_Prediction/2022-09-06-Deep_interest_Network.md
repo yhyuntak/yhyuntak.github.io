@@ -46,7 +46,7 @@ CTR은 시스템에 의해 예측될 필요가 있습니다. 이런 이유로, C
 최근에, [컴퓨터 비젼](https://arxiv.org/abs/1608.06993)과 [NLP](https://arxiv.org/abs/1409.0473)에서의 딥러닝의 성공으로인해, 딥러닝 기반의 방법들이 CTR을 예측하는 방법에 대한 연구[3,4,21,26]가 발표되고 있습니다.
 이 연구들은 similar Embedding&MLP 패러다임을 따릅니다. 이것들은 크기가 큰 scale sparse input feature들을 낮은 차원의 embedding vector들로 매핑하고, 
 group단위로 고정된 길이의 백터들로 변환됩니다. 마지막으로 이 두개를 결합해 multi-layer perceptron(MLP)으로 보내 feature들 간의 비선형적 관계를 학습합니다. 
-[로지스틱 회귀 모델](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://static.googleusercontent.com/media/research.google.com/ko//pubs/archive/41159.pdf)과 비교해서, 위 방법들은 많은 feature engineering job들을 줄일 수 있고,
+[로지스틱 회귀 모델](https://static.googleusercontent.com/media/research.google.com/ko//pubs/archive/41159.pdf)과 비교해서, 위 방법들은 많은 feature engineering job들을 줄일 수 있고,
 model capability를 크게 향상시킬 수 있습니다. 앞으로 이 논문에선 위 방법들은 간단히 Embedding&MLP라고 부르겠습니다.(이 리뷰 글에선 E&M이라고 하겠습니다.) 이것은 CTR 예측 task에서 요즘(당시에) 가장 인기가 많습니다. 
 
 그러나, dimension이 제한된 user presentation vector는 E&M 방법들에서 사용자들의 다양한 interest들을 표현하는데 문제가 될 것입니다(bottleneck). 이커머스 사이트에서 광고를 전시하는 것을 한번 예제로 봅시다.
@@ -77,28 +77,28 @@ large scale sparse feature들을 가진 산업의 deep network를 학습하는 �
 CTR 예측 모델의 구조는 얕은 것에서부터 깊은 것까지 발전해왔습니다. 동시에, CTR모델에 사용되는 특징들의 차원이나 샘플들(?)의 수는 점점 더 커져갔습니다. 
 성능을 향상시키기 위해 더 좋은 특징 관계들(feature relations)를 추출하기 위해서, 몇몇 연구들은 모델 구조의 설계에 집중했습니다. 
 
-[NNLM](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)는 language 모델링에서 차원의 저주를 피하기 위해 각 단어에 대한
+[NNLM](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)는 language 모델링에서 차원의 저주를 피하기 위해 각 단어에 대한
 distributed representation을 학습합니다. 보통 embedding으로 불리는 이 방법은 large-scale sparse input들을 다루는 많은 NLP 모델들과 CTR 예측 모델들에 영감을 주었습니다. 
 _{NNLM은 꼭 읽어봐야 할 것 같습니다. 이번 논문 다음으로 읽읍시다.}_
 
-[LS-PLM](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/1704.05194.pdf)과 FM 모델은 하나의 hidden layer를 가진 네트워크 클래스로 볼 수 있습니다. 
+[LS-PLM](https://arxiv.org/pdf/1704.05194.pdf)과 FM 모델은 하나의 hidden layer를 가진 네트워크 클래스로 볼 수 있습니다. 
 이것은 sparse inputs에 embedding layer를 먼저 적용하고난 다음에 target fitting을 위해 특별히 설계된 transformation functions을 부과합니다. 동시에 특징들 사이의 combination relation을 포착하기 위해서 말이죠. 
 _{이게 논문을 안 읽어봐서 정확한 내용은 모르겠습니다.}_
 
-Deep Crossing, [Wide&Deep learning](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/1606.07792.pdf) 그리고 [유튜브 추천 CTR 모델](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://static.googleusercontent.com/media/research.google.com/ko//pubs/archive/45530.pdf)은
+Deep Crossing, [Wide&Deep learning](https://arxiv.org/pdf/1606.07792.pdf) 그리고 [유튜브 추천 CTR 모델](https://static.googleusercontent.com/media/research.google.com/ko//pubs/archive/45530.pdf)은
 LS-PLM과 FM의 transformation function을 complex MLP network로 바꿈으로써 확장시킵니다. complex MLP network로 바꾸는 것은 model capability를 굉장히 향상시킵니다! 
-[PNN](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/1611.00144.pdf)은 embedding layer 다음에 product layer를 넣어서 high-order feature interaction을 포착하려 했습니다.
+[PNN](https://arxiv.org/pdf/1611.00144.pdf)은 embedding layer 다음에 product layer를 넣어서 high-order feature interaction을 포착하려 했습니다.
 _{high-order라는건 고차원을 이야기하는건가?}_ 
-[DeepFM](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/1703.04247.pdf)은  feature engineering 없이 Wide&Deep에서 "wide" 모듈로서 factorization machine을 사용합니다.
+[DeepFM](https://arxiv.org/pdf/1703.04247.pdf)은  feature engineering 없이 Wide&Deep에서 "wide" 모듈로서 factorization machine을 사용합니다.
 전반적으로 위 방법들은 (sparse한 특징들의 dense representation을 학습하기 위한)embedding layer의 combination와 (특징들의 combination 관계들을 자동으로 학습하는)MLP을 갖는 유사한 모델 구조를 따릅니다.
 **이런 CTR 예측 모델들은 사람이 직접 feature engineering을 하는 것을 굉장히 줄여줍니다!**  그러나 사용자 행동들(user behaviors)이 많은 경우, 특징들은 종종 길이가 변하는 데이터를 가집니다. 
 예를 들면, 검색된 용어 또는 유튜브 추천 시스템에서 시청된 비디오등이 있습니다. 이런 모델들은 종종 임베딩 벡터들의 일치하는 목록을 sum/average pooling을 통해서 고정된 길이의 벡터로 변환합니다. 
 **단, 이 때 정보 손실을 야기하게 됩니다.** 
 저자들이 제안하는 DIN은 주어진 광고들에 대한 representation 벡터들을 적응적으로 학습함으로써 이런 문제들을 해결합니다. 동시에 모델의 표현 능력또한 상승시키면서 말이죠!
 
-Attention mechanism은 [NMT(Neural Machine Translation)](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/1409.0473.pdf) 분야로부터 유래됩니다. 
+Attention mechanism은 [NMT(Neural Machine Translation)](https://arxiv.org/pdf/1409.0473.pdf) 분야로부터 유래됩니다. 
 NMT는 기대되는 annotation을 얻기 위해 모든 annotation의 가중치 합을 얻습니다. 그리고 다음 목표 단어 생성에 관련된 정보에만 오직 집중하죠. 
-[Deep intent](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.kdd.org/kdd2016/papers/files/rfp0289-zhaiA.pdf)는 검색 광고의 맥락에 attention을 적용합니다. 
+[Deep intent](https://www.kdd.org/kdd2016/papers/files/rfp0289-zhaiA.pdf)는 검색 광고의 맥락에 attention을 적용합니다. 
 NMT와 유사하게 이것은 [RNN](https://ieeexplore.ieee.org/document/6795228)을 모델 텍스트에 사용하고 각각의 쿼리에 핵심 단어들에 집중하게끔 돕는 global hidden vector를 배웁니다. 
 이것은 attention의 사용이 쿼리 또는 광고의 주요 의도를 포착하는데 도움이 될 수 있다고 보여줍니다. DIN은 관련된 사용자 behavior들에 대한 soft-search를 하기 위한 local activation unit을 설계합니다.
 그리고 DIN은 주어진 광고에 관한 사용자 관심도들의 adaptive representation을 얻기 위해 weighted sum pooling을 씁니다.
@@ -149,7 +149,7 @@ CTR 예측 모델을 만들 때, 많은 Historical behavior들로부터 사용�
 * visited_cate_ids = {Bag,Book}
 * ad_cate_id = Book
 
-이 특징들은 인코딩[ [4](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/1606.07792.pdf),[19](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://static.googleusercontent.com/media/research.google.com/ko//pubs/archive/41159.pdf),21]을 통해 고차원의 sparse binary feature로 변환됩니다.
+이 특징들은 인코딩[ [4](https://arxiv.org/pdf/1606.07792.pdf),[19](https://static.googleusercontent.com/media/research.google.com/ko//pubs/archive/41159.pdf),21]을 통해 고차원의 sparse binary feature로 변환됩니다.
 수학적으로 알아야할 개념들에 대해 적어두겠습니다.
 
 * i번째 feature group의 encoding vector : $t_i\;\in\;R^{K_i}$. $K_i$은 feature group i의 차원이고, feature group i은 $K_i$ 유일한 광고들을 포함을 의미함. _{$K_i$ unique ads가 무엇인지 아직 모르겠습니다.}_
@@ -395,11 +395,11 @@ $E[s]$와 $\text{Var}[s]$ 가 0일땐, Dice는 PReLu에서 degenerate하다고 �
 
 비교에 사용되는 모델들은 다음의 5가지 입니다.
 
-*[LR](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://static.googleusercontent.com/media/research.google.com/ko//pubs/archive/41159.pdf) : CTR 예측 태스크를 위한 딥 네트워크들이 있기 전에 널리 사용되던 얕은 모델
+*[LR](https://static.googleusercontent.com/media/research.google.com/ko//pubs/archive/41159.pdf) : CTR 예측 태스크를 위한 딥 네트워크들이 있기 전에 널리 사용되던 얕은 모델
 * BaseModel : 4.2에서 소개했던 Embedding&MLP 구조를 갖는 모델입니다. 
 * [Wide&Deep](https://arxiv.org/abs/1606.07792) : 실제 산업 현장에서 사용되는 모델입니다. 자세한 내용은 논문을 참고합시다.
-* [PNN](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/1611.00144.pdf) : BaseModel에서 조금 향상된 모델입니다.
-* [DeepFM](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/1703.04247.pdf) : Wide&Deep에 "wide" 모듈로써 feature engineering job을 저장하는 factorization machine을 넣은 모델입니다.
+* [PNN](https://arxiv.org/pdf/1611.00144.pdf) : BaseModel에서 조금 향상된 모델입니다.
+* [DeepFM](https://arxiv.org/pdf/1703.04247.pdf) : Wide&Deep에 "wide" 모듈로써 feature engineering job을 저장하는 factorization machine을 넣은 모델입니다.
 
 <br/>
 
@@ -448,9 +448,9 @@ DIN이 가장 성능이 좋지만, 특히 사용자 행동 데이터가 굉장�
 알리바바의 데이터셋은 엄청 차원이 커서, overfitting문제를 만났다고 하네요. 어떤 규제도 걸지 않고 overfitting문제를 만나게 되면, 그림 4의 어두운 초록색 선처럼
 epoch 1부터 모델의 성능이 급격히 떨어집니다. 그래서 저자들은 다음의 4가지의 규제 방식으로 각각 실험해서 차이를 확인해보려고합니다.
 
-* [Dropout](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf) 
+* [Dropout](https://jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf) 
 * Filter
-* Regularization in [DiFacto](chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.cs.cmu.edu/~muli/file/difacto.pdf) : feature들과 자주 관련되는 파라미터들의 지나친 규제를 줄입니다.?
+* Regularization in [DiFacto](https://www.cs.cmu.edu/~muli/file/difacto.pdf) : feature들과 자주 관련되는 파라미터들의 지나친 규제를 줄입니다.?
 * MBA : 저자들이 제안하는 방법입니다.
 
 그림 4와 테이블 4는 결과를 보여줍니다. 
