@@ -105,8 +105,8 @@
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "재밌는 잡지식" %}
-                        <li><a href="/categories/재밌는-잡지식" class="">재밌는 잡지식 ({{category[1].size}})</a></li>
+                    {% if category[0] == "다양한 잡지식" %}
+                        <li><a href="/categories/다양한-잡지식" class="">다양한 잡지식 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>

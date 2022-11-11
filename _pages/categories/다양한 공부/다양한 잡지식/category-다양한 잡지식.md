@@ -1,7 +1,7 @@
 ---
-title : "재밌는 잡지식"
+title : "다양한 잡지식"
 layout : archive
-permalink : categories/재밌는-잡지식
+permalink : categories/다양한-잡지식
 author_profile : true
 sidebar_main : true
 ---
@@ -9,5 +9,5 @@ sidebar_main : true
 
 ***
 
-{% assign posts = site.categories['재밌는 잡지식'] %} <!-- site.categories.example -->
+{% assign posts = site.categories['다양한 잡지식'] %} <!-- site.categories.example -->
 {% for post in posts %} {% include archive-single_main.html type=page.entries_layout %} {% endfor %}
